@@ -147,28 +147,125 @@ import pandas as pd
 # print("\n-------------------\n")
 
 
-import numpy as np
+# import numpy as np
 
-dt = np.random.randint(10, size=(5, 5))
-df = pd.DataFrame(dt)
+# dt = np.random.randint(10, size=(5, 5))
+# df = pd.DataFrame(dt)
 
-print(df)
-print("\n-------------------\n")
+# print(df)
+# print("\n-------------------\n")
 
-print(df[2])
-print("\n-------------------\n")
+# print(df[2])
+# print("\n-------------------\n")
 
-print(df.loc[2])
-print("\n-------------------\n")
+# print(df.loc[2])
+# print("\n-------------------\n")
 
-print(df.loc[3][1])
-print("\n-------------------\n")
+# print(df.loc[3][1])
+# print("\n-------------------\n")
 
-print(df.head(2))
-print("\n-------------------\n")
+# print(df.head(2))
+# print("\n-------------------\n")
 
-print(df.tail(3))
-print("\n-------------------\n")
+# print(df.tail(3))
+# print("\n-------------------\n")
 
-print(df.sample())
-print("\n-------------------\n")
+# print(df.sample())
+# print("\n-------------------\n")
+
+# 파일 생성
+
+from faker import Faker as fk
+import os
+
+temp = fk("ko-KR")
+print(temp.name())
+
+folder = "data/"
+if not os.path.isdir(folder) :
+    os.mkdir(folder)
+    
+with open(folder + "fktemp.csv", "w", encoding='utf8') as f :
+    f.write("name,address,postcode,company,job,phone,email,id,ip_prv,ip_pub,catch_parase,color\n")
+
+with open(folder + "fktemp.csv", "a", newline='', encoding='utf8') as f :
+    for i in range(30) :
+        f.write(temp.name() + "," + 
+            temp.address() + "," + 
+            temp.postcode() + "," + 
+            temp.company() + "," + 
+            temp.job() + "," + 
+            temp.phone_number() + "," + 
+            temp.email() + "," + 
+            temp.user_name() + "," + 
+            temp.ipv4_private() + "," + 
+            temp.ipv4_public() + "," + 
+            temp.catch_phrase() + "," + 
+            temp.color_name() + "\n")
+
+target = folder + "fktemp.csv"
+
+df = pd.read_csv(target)
+
+# print(df.values[0])
+
+# print(df.head())
+# print(df.head(3))
+
+# print(df.tail())
+# print(df.tail(3))
+
+# print(df.sample())
+# print(df.sample(4))
+
+# print(df.index)
+# print(df.dtypes)
+# # print(type(df))
+
+# print(df.values)
+# print("\n-------------------\n")
+# print(df.values[3])
+
+# for el in df.values[0] :
+#     print(el)
+
+# print(df.info())
+
+# print(df.isnull())
+# print(df.isnull().sum())
+
+# print(df.name)
+# print(df.postcode)
+# print(df.job)
+# print(df.phone)
+# print(df.id)
+# print(df.company)
+# print(df.catch_parase)
+# print(df.color)
+
+# print(df["name"])
+# print(df["postcode"])
+# print(df["job"])
+# print(df["phone"])
+# print(df["id"])
+# print(df["company"])
+# print(df["catch_parase"])
+# print(df["color"])
+
+# # print(df[["name", "id"]])
+# post = df[["name", "address", "postcode"]]
+# print(post)
+
+# print(df.postcode.describe())
+# print(df.color.describe())
+
+# print(df.color.count())
+# # 각 데이터별 카운팅
+# print(df.color.value_counts())
+
+# num1 = df.postcode.sum() / df.name.count()
+# print(num1)
+
+print(df.name == "김예지")
+tp = df[df.color == "Beige"].head(1)
+print(tp)
